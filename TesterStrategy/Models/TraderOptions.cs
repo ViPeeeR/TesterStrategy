@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TesterStrategy.BLL.Strategies;
 
 namespace TesterStrategy.Models
 {
@@ -8,6 +9,6 @@ namespace TesterStrategy.Models
     {
         public double? Balance { get; set; }
 
-        public MarketInfo MarketInfo { get; set; }
+        public IStrategy[] Strategies { get; set; }
     }
 }

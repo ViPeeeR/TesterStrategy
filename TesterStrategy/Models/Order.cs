@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TesterStrategy.Models
 {
-    public class Deal
+    public class Order
     {
         public Guid Id { get; set; }
 
@@ -52,6 +52,13 @@ namespace TesterStrategy.Models
         /// Полученная прибыль или убыток
         /// </summary>
         public double Profit { get; set; }
+
+        /// <summary>
+        /// Номер системы, которая следит за ордером
+        /// </summary>
+        public int MagicNumber { get; set; }
+
+        public string Symbol { get; set; }
 
     }
 }

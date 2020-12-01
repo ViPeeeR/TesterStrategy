@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="RTS-12.20_H1.csv" />
     <None Remove="RTS-9.20_H1.csv" />
     <None Remove="RTS-9.20_M1.csv" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="RTS-12.20_H1.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="RTS-9.20_H1.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

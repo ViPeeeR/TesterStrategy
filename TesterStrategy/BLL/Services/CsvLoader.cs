@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TesterStrategy.BLL.Services.Interfaces;
 using TesterStrategy.Models;
 
 namespace TesterStrategy.BLL.Services
@@ -50,6 +51,7 @@ namespace TesterStrategy.BLL.Services
                 });
             }
 
+            _logger.LogInformation($"File was load and contains {bars.Count} bars");
 
             return bars.ToArray();
         }

@@ -8,11 +8,9 @@ namespace TesterStrategy.BLL.Interfaces
     {
         void Configuration(Action<TraderOptions> config);
 
-        void Trade(OrderType orderType, double price, int volume, int? takeprofitPips = null, int? stoplossPips = null);
+        IReadOnlyList<Order> Orders { get; }
 
-        List<Deal> Orders { get; }
-
-        List<Deal> History { get; }
+        IReadOnlyList<Order> History { get; }
 
         double Balance { get; }
 

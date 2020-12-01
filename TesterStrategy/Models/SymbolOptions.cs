@@ -4,8 +4,10 @@ using System.Text;
 
 namespace TesterStrategy.Models
 {
-    public class MarketOptions
+    public class SymbolOptions
     {
+        public string Name { get; set; }
+
         public Bar[] Bars { get; set; }
 
         /// <summary>

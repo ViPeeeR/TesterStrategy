@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TesterStrategy.BLL.Interfaces;
+using TesterStrategy.Models;
 
-namespace TesterStrategy.Models
+namespace TesterStrategy.BLL
 {
-    public class Chart
+    public class Chart : IChart
     {
         private readonly Bar[] _allBars;
         private readonly List<Bar> _currentChart = new List<Bar>();
 
-        public Chart(Bar[] history)
+        public Bar Current => GetBar(0);
+
+        public Chart(Bar[] bars)
         {
-            _allBars = history;
+            _allBars = bars ?? throw  new ArgumentNullException(nameof(bars));
         }
 
         public Bar GetBar(DateTime key)
@@ -23,10 +27,15 @@ namespace TesterStrategy.Models
         {
             if (_currentChart.Any())
             {
-                return _currentChart[0];
+                return _currentChart[index];
             }
 
             return null;
+        }
+
+        public Bar[] GetBars()
+        {
+            return _currentChart.ToArray();
         }
 
         public Bar Next()
@@ -48,6 +57,12 @@ namespace TesterStrategy.Models
 
             _currentChart.Insert(0, _allBars[index]);
             return _currentChart[0];
+        }
+
+        public void Finish()
+        {
+            _currentChart.Clear();
+            _currentChart.AddRange(_allBars.Reverse());
         }
     }
 }
