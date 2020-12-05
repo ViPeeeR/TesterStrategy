@@ -1,5 +1,6 @@
 ﻿using System;
 using TesterStrategy.BLL.Interfaces;
+using TesterStrategy.BLL.Services.Interfaces;
 
 namespace TesterStrategy.BLL.Indicators
 {

@@ -60,10 +60,10 @@ namespace TesterStrategy.BLL.Services
         {
             try
             {
-                using var fileStream = new FileStream(filename, FileMode.Open);
+                await using var fileStream = new FileStream(filename, FileMode.Open);
                 var buffer = new byte[fileStream.Length];
-                var readingBytes = await fileStream.ReadAsync(buffer, 0, (int)fileStream.Length, token);
-                return Encoding.UTF8.GetString(buffer.ToArray())?.Split("\r\n");
+                await fileStream.ReadAsync(buffer.AsMemory(0, (int) fileStream.Length), token);
+                return Encoding.UTF8.GetString(buffer.ToArray()).Split("\n");
             }
             catch (Exception ex)
             {

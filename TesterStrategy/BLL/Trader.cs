@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using TesterStrategy.BLL.Interfaces;
 using TesterStrategy.BLL.Services;
 using TesterStrategy.BLL.Services.Interfaces;
@@ -16,7 +14,7 @@ namespace TesterStrategy.BLL
 
         private readonly IMarketInfo _marketInfo;
         private ITradeManager _tradeManager;
-        private IStrategy[] _strategies;
+        private Strategy[] _strategies;
 
         public IReadOnlyList<Order> Orders => _tradeManager.GetOrders();
 
@@ -45,27 +43,26 @@ namespace TesterStrategy.BLL
                 _tradeManager = new TradeManager(_marketInfo.SymbolInfo, traderOptions.Balance.Value);
             }
 
-            _strategies = traderOptions.Strategies;
+            _strategies = traderOptions.Strategies ?? Array.Empty<Strategy>();
             foreach (var strategy in _strategies)
             {
                 strategy.Configuration(strategyOption =>
                 {
-                    strategyOption.Symbol = _marketInfo.SymbolInfo;
                     strategyOption.TradeManager = _tradeManager;
                     strategyOption.Volume = 1;
                 });
             }
         }
 
-        public void Update()
+        public void Update(IChart chart)
         {
-            // TODO: обновить профит у сделок, проверить ТП и СЛ
-            _tradeManager.Update();
+            // обновить профит у сделок, проверить ТП и СЛ
+            _tradeManager.UpdateOrders(chart);
 
-            // TODO: дернуть стратегии для проверки входа/выхода
+            // дернуть стратегии для проверки входа/выхода
             foreach (var strategy in _strategies)
             {
-                strategy.Run();
+                strategy.Run(chart);
             }
         }
     }

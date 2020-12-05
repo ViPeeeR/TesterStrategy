@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TesterStrategy.BLL.Exceptions;
 using TesterStrategy.BLL.Interfaces;
+using TesterStrategy.BLL.Services;
+using TesterStrategy.BLL.Services.Interfaces;
 using TesterStrategy.Models;
 
 namespace TesterStrategy.BLL
@@ -10,10 +12,14 @@ namespace TesterStrategy.BLL
     public class Market : IMarket, IStockCommunity, IMarketInfo
     {
         private readonly ICollection<ITrader> _traders;
+
+        private readonly IChartManager _chartManager;
+
         public SymbolInfo SymbolInfo { get; private set; }
 
-        public Market()
+        public Market(Bar[] bars)
         {
+            _chartManager = new ChartManager(bars);
             _traders = new List<ITrader>();
         }
 
@@ -24,17 +30,19 @@ namespace TesterStrategy.BLL
 
             SymbolInfo = new SymbolInfo(
                 symbolOptions.Name,
-                symbolOptions.Bars,
                 symbolOptions.Margin,
                 symbolOptions.PriceStep,
                 symbolOptions.PipsStep);
         }
 
-        public bool Tick()
+        public void Emulate()
         {
-            var isUpdate = SymbolInfo.Chart?.Next() != null;
-            Notify();
-            return isUpdate;
+            while (Tick())
+            {
+                // тут можно выводить лог, если надо, что идет график, либо задержку делать
+            }
+
+            // TODO: Закрыть все не закрытые сделки
         }
 
         public void RegisterTrader(ITrader trader)
@@ -46,8 +54,15 @@ namespace TesterStrategy.BLL
         {
             foreach (var trader in _traders)
             {
-                trader.Update();
+                trader.Update(_chartManager.Chart);
             }
+        }
+
+        private bool Tick()
+        {
+            var isUpdate = _chartManager.Next();
+            Notify();
+            return isUpdate;
         }
     }
 }

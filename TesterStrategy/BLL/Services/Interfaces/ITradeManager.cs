@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using TesterStrategy.BLL.Interfaces;
 using TesterStrategy.Models;
 
 namespace TesterStrategy.BLL.Services.Interfaces
 {
     public interface ITradeManager
     {
-        void Open(OrderType orderType, double price, int volume, double? takeProfit = null, double? stopLoss = null, int magicNumber = 0);
+        void Open(IChart chart, OrderType orderType, double price, int volume, double? takeProfit = null, double? stopLoss = null, int magicNumber = 0);
 
-        void Close(double price);
+        void Close(IChart chart, double price, int? magicNumber);
 
         IReadOnlyList<Order> GetOrders(int magicNumber);
 
@@ -20,6 +21,6 @@ namespace TesterStrategy.BLL.Services.Interfaces
 
         double Margin { get; }
 
-        void Update();
+        void UpdateOrders(IChart chart);
     }
 }

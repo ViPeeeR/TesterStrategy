@@ -7,6 +7,6 @@ namespace TesterStrategy.BLL.Interfaces
     {
         void SetSymbol(Action<SymbolOptions> config);
 
-        bool Tick();
+        void Emulate();
     }
 }

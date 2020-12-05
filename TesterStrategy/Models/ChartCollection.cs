@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TesterStrategy.BLL;
+using TesterStrategy.BLL.Services;
 
 namespace TesterStrategy.Models
 {

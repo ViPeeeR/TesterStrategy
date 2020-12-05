@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TesterStrategy.BLL.Services.Interfaces;
 using TesterStrategy.Models;
 
 namespace TesterStrategy.BLL.Interfaces
@@ -16,6 +17,6 @@ namespace TesterStrategy.BLL.Interfaces
 
         double Margin { get; }
 
-        void Update();
+        void Update(IChart chart);
     }
 }

@@ -8,8 +8,6 @@ namespace TesterStrategy.Models
     {
         public string Name { get; set; }
 
-        public Bar[] Bars { get; set; }
-
         /// <summary>
         /// Маржа на один контракт
         /// </summary>

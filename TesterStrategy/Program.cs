@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.Threading.Tasks;
-using TesterStrategy.BLL;
 using TesterStrategy.BLL.Interfaces;
 
 namespace TesterStrategy

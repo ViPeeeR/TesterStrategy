@@ -9,6 +9,6 @@ namespace TesterStrategy.Models
     {
         public double? Balance { get; set; }
 
-        public IStrategy[] Strategies { get; set; }
+        public Strategy[] Strategies { get; set; }
     }
 }

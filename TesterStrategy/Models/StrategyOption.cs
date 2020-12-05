@@ -10,7 +10,5 @@ namespace TesterStrategy.Models
         public int? Volume { get; set; }
 
         public ITradeManager TradeManager { get; set; }
-
-        public SymbolInfo Symbol { get; set; }
     }
 }

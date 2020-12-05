@@ -8,21 +8,17 @@ namespace TesterStrategy.Models
     {
         public SymbolInfo(
             string name,
-            Bar[] bars, 
             double margin,
             double priceStep, 
             double pipsStep)
         {
-            Chart = new Chart(bars);
             Margin = margin;
             PriceStep = priceStep;
             PipsStep = pipsStep;
             Id = name;
         }
 
-        public string Id { get; set; }
-
-        public IChart Chart { get; }
+        public string Id { get; }
 
         public double Margin { get; }
 

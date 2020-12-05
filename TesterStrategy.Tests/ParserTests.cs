@@ -47,9 +47,9 @@ namespace TesterStrategy.Tests
             var parser = new CsvLoader(loggerMock);
             var fileH1 = Path.Combine(Directory.GetCurrentDirectory(), "RTS-12.20_H1.csv");
             var bars = await parser.LoadBars(fileH1);
-            var chart = new Chart(bars);
-            chart.Finish();
-            var ema = new MovingAverage(chart, 50);
+            var chartManager = new ChartManager(bars);
+            chartManager.Finish();
+            var ema = new MovingAverage(chartManager.Chart, 50);
 
             // Act
             var emaValues = ema.EmaValue();

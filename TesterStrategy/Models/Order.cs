@@ -6,7 +6,7 @@ namespace TesterStrategy.Models
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Цена открытия сделки
